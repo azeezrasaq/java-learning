@@ -1,21 +1,8 @@
 package complexjavaobject;
 
-import java.io.Console;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Scanner;
-import java.util.function.Function;
-import java.util.function.ToDoubleFunction;
-import java.util.function.ToIntFunction;
-import java.util.function.ToLongFunction;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 public class PersonMain extends Person {
 
@@ -23,7 +10,7 @@ public class PersonMain extends Person {
 	static List<Person> list;
 	static Scanner printout;
 	static Integer minValue = 1;
-	static Integer maxValue = 3;
+	static Integer maxValue = 5;
 
 	/**
 	 * @param args
@@ -34,53 +21,69 @@ public class PersonMain extends Person {
 		while (choiceEntry != maxValue) {
 			printOptions();
 		}
-		// for (int i = 0; i < 2; i++)
-
-		// list.add(addres);
-		// list.add(company);
-
-		// Sorting
-		// Collections.sort(list, new Comparator<Person>() {
-		//
-		// @Override
-		// public int compare(Person Name, Person lName) {
-		//
-		// return Name.getLastName().compareTo(lName.getLastName());
-		// }
-		//
-		// });
-		// // /((Address) list.get(1)).setCity("Azeez");
-		// list.get(i).setFirstName("Azeez");
-
-		// Person obj = iterator.next();
-		// listIterator.set(persn);
-
 	}
 
 	public static void printOptions() {
 
 		System.out.println("***Select one of the following options**");
 		System.out.println("**1**, Add New User");
-		System.out.println("**2**, Find existing User");
-		System.out.println("**3**, Exit User");
+		System.out.println("**2**, Display User");
+		System.out.println("**3**, Find User By First Name");
+		System.out.println("**4**, Update Company Details");
+		System.out.println("**5**, Exit the Program");
 		while (choiceEntry < minValue || choiceEntry > maxValue) {
+
 			System.out.println("Please Enter between " + minValue.toString()
-					+ " - " + maxValue.toString() + ": ");
+					+ " - " + maxValue.toString() + ", ");
+
 			choiceEntry = printout.nextInt();
 		}
 		switch (choiceEntry) {
 		case 1:
 			Person pern = getNewUser();
 			list.add(pern);
+
 			break;
 		case 2:
 			System.out.println(list);
+
 			break;
 		case 3:
-			System.out.print("Exit the program");
+			printout.nextLine();
+
+			System.out.print("Please Find user By First Name:  ");
+			String firstnam = printout.nextLine();
+
+			for (Person persnn : list) {
+				if (persnn.getFirstName().equals(firstnam)) {
+
+					System.out.println(list);
+
+				} else {
+					System.out.println("The name cannot be found");
+
+				}
+			}
 			break;
+		case 4:
+
+			printout.nextLine();
+
+			for (Person perss : list) {
+
+				perss.getAddress().setCompany(
+						ChangeAddressSpecifiedCompnayDetail());
+
+				System.out.println(list);
+				printout.nextLine();
+				break;
+			}
+		case 5:
+
+			System.out.println("Exit program: ");
 		default:
 			System.out.print("You typed wrong.");
+			break;
 		}
 		choiceEntry = -1;
 
@@ -98,9 +101,10 @@ public class PersonMain extends Person {
 		Address addres = new Address();
 		Company company = new Company();
 		Person persn = new Person();
-
+		printout.nextLine();
 		System.out.print("Please Enter Your First Name: ");
 		persn.setFirstName(printout.nextLine());
+
 		System.out.print("Please Enter Your LastName: ");
 		persn.setLastName(printout.nextLine());
 
@@ -126,5 +130,16 @@ public class PersonMain extends Person {
 		persn.setAddress(addres);
 
 		return persn;
+	}
+
+	public static Company ChangeAddressSpecifiedCompnayDetail() {
+		Company company = new Company();
+		System.out.print("Please Enter Your New Company Name: ");
+		company.setCompanyName(printout.nextLine());
+
+		System.out.print("Please Enter Your New Company Website: ");
+		company.setCompanyWebsite(printout.nextLine());
+
+		return company;
 	}
 }
