@@ -9,6 +9,7 @@ public class Person {
 	private String FirstName;
 	private String LastName;
 	private Address address;
+	private int phoneNumber; 
 
 	// private String address;
 
@@ -44,6 +45,14 @@ public class Person {
 		obj.put("Address", address);
 
 		return obj.toJSONString();
+	}
+
+	public int getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(int phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 }
