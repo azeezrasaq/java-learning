@@ -12,6 +12,8 @@ public class Address {
 	private String City;
 	private String Country;
 	private Company company;
+	private String County;
+	
 
 	public String getStreet1() {
 		return street1;
